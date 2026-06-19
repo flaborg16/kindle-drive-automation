@@ -3,9 +3,7 @@ name: Kindle Drive Automation
 on:
   workflow_dispatch:
   schedule:
-    # Every 15 minutes. Reduce this if you use a private repo and want to save Actions minutes.
-    - cron: "*/15 * * * *"
-
+    - cron: "7,22,37,52 * * * *"
 jobs:
   run:
     runs-on: ubuntu-latest
