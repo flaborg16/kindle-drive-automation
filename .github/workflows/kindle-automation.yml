@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     # Test mode: every 5 minutes, away from the top of the hour
-    - cron: "3,8,13,18,23,28,33,38,43,48,53,58 * * * *"
+    - cron: "3/5 * * * *"
 
 jobs:
   run-kindle-automation:
