@@ -1,4 +1,4 @@
-﻿name: Schedule Test
+name: Schedule Test No BOM
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "9,24,39,54 * * * *"
 
 jobs:
   test:
