@@ -3,14 +3,24 @@ name: Kindle Drive Automation
 on:
   workflow_dispatch:
   schedule:
-    - cron: "7,22,37,52 * * * *"
+    # Test mode: every 5 minutes, away from the top of the hour
+    - cron: "3/5 * * * *"
+
 jobs:
-  run:
+  run-kindle-automation:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+
+    env:
+      GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+      SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+      SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
+      KINDLE_EMAIL: ${{ secrets.KINDLE_EMAIL }}
+      KINDLE_ROOT_FOLDER_NAME: Kindle_Automation
+      PROCESS_NOTES_AS_QUOTES: "false"
+      MAX_EMAIL_ATTACHMENT_MB: "24"
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v5
 
       - name: Set up Python
@@ -21,32 +31,20 @@ jobs:
       - name: Install system converters
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            pandoc \
-            libreoffice \
-            calibre \
-            fonts-dejavu-core \
-            fonts-liberation
+          sudo apt-get install -y libreoffice pandoc calibre
 
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Create Google service account file
+        run: |
+          echo "$GOOGLE_SERVICE_ACCOUNT_JSON" > service_account.json
+
       - name: Run automation
         env:
-          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
-          SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
-          KINDLE_EMAIL: ${{ secrets.KINDLE_EMAIL }}
-          KINDLE_ROOT_FOLDER_NAME: Kindle_Automation
-          BOOKS_FOLDER_NAME: Books_To_Kindle
-          NOTEBOOKS_FOLDER_NAME: Notebooks
-          SENT_FOLDER_NAME: Sent_To_Kindle
-          PROCESSED_NOTEBOOKS_FOLDER_NAME: Processed_Notebooks
-          FAILED_FOLDER_NAME: Failed
-          QUOTATIONS_FOLDER_NAME: Quotations
-          MAX_EMAIL_ATTACHMENT_MB: "24"
-          PROCESS_NOTES_AS_QUOTES: "false"
+          GOOGLE_SERVICE_ACCOUNT_FILE: service_account.json
+          PYTHONPATH: src
         run: |
-          PYTHONPATH=src python -m kindle_drive_automation.main
+          python -m kindle_drive_automation.main
