@@ -3,3 +3,10 @@
 service_account.json
 credentials.json
 token.json
+
+.env
+service_account.json
+credentials.json
+token.json
+*.pem
+*.key
