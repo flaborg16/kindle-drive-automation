@@ -10,3 +10,159 @@ credentials.json
 token.json
 *.pem
 *.key
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.so
+
+# Python build/distribution
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+kindle/
+*.env/
+
+# =========================
+# Secrets / credentials
+# =========================
+.env
+.env.*
+!.env.example
+
+service_account.json
+credentials.json
+token.json
+client_secret*.json
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+
+# Google / OAuth / API local auth
+google-credentials.json
+google-service-account.json
+oauth_token.json
+
+# =========================
+# Local project runtime files
+# =========================
+tmp/
+temp/
+.cache/
+.cache_*/
+logs/
+*.log
+
+data/
+downloads/
+converted/
+output/
+outputs/
+generated/
+quote_images/
+demo_output/
+
+# Keep folder placeholders if needed
+!.gitkeep
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# =========================
+# IDE/editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+
+# =========================
+# Testing / coverage
+# =========================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.hypothesis/
+
+# =========================
+# Jupyter
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Node / frontend, just in case
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Archives / packaged local files
+# =========================
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# =========================
+# Large personal files
+# =========================
+*.epub
+*.mobi
+*.azw
+*.azw3
+*.pdf
+*.doc
+*.docx
+*.ppt
+*.pptx
+*.xls
+*.xlsx
+*.csv
